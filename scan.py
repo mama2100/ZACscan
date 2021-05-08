@@ -114,6 +114,17 @@ def ten():#BSPHP 未授权访问 信息泄露漏洞
         print("\033[34m存在BSPHP未授权访问\033[0m")
     else:
         print("BSPHP", url2.status_code)
+
+def eleven():#邮件归档系统eea信息泄露
+    url1 = "http://" + url + "/authenticationserverservlet/"
+    try:
+        url2 = requests.get(url1)
+    except BaseException:
+        print("无法获取响应码")
+    if url2.status_code == 200:
+        print("\033[34m存在EEA信息泄露\033[0m")
+    else:
+        print("EEA邮件归档系统", url2.status_code)
 one()
 two()
 three()
@@ -124,4 +135,5 @@ seven()
 eight()
 nine()
 ten()
+eleven()
 os.system("pause")
