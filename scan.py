@@ -126,11 +126,7 @@ def twelve():#蓝海卓越计费管理系统任意文件读取
     else:
         pass
 
-zac()
-urlinput = input("单个扫描请按1，批量扫描请按2:")
-
-if urlinput=="1":
-    url = input("请输入你要扫描的网址")
+def main():
     one()
     two()
     three()
@@ -143,6 +139,12 @@ if urlinput=="1":
     ten()
     eleven()
     twelve()
+zac()
+urlinput = input("单个扫描请按1，批量扫描请按2:")
+
+if urlinput=="1":
+    url = input("请输入你要扫描的网址")
+    main()
     os.system("pause")
 elif urlinput=="2":
     while 1:
@@ -153,18 +155,7 @@ elif urlinput=="2":
         for line in file.readlines():
             url = line.strip('\n')
             print(url)
-            one()
-            two()
-            three()
-            four()
-            five()
-            six()
-            seven()
-            eight()
-            nine()
-            ten()
-            eleven()
-            twelve()
+            main()
         os.system("pause")
         print(url)
         if not url:

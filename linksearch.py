@@ -8,9 +8,10 @@ url="http://"+link
 url1=requests.get(url)              #get网址
 url2=url1.text
 html=etree.HTML(url2)
-print("1 获得网页下全部的连接")
-print("2 获得前缀不是www的连接")
-print("3 获取all.txt下所有链接，并查询子链接")
+print("1 获得网页下全部的连接（无过滤）")
+print("2 获得前缀不是www的连接（有过滤）")
+print("3 经过选项1的扫描之后，根据文件再次进行一轮扫描（无过滤）(时间长，慎选）")
+print("4 获取前缀是http的连接（有过滤）")
 linksearch = int(input("你需要得到的连接"))
 
 def all():
@@ -20,13 +21,34 @@ def all():
     f.write(str.join(zac))
     f.close()
 
+def filter():
+    zac = html.xpath('//a/@href')
+    str = '\n'
+    zac1 = []
+    num = 0
+    filter=[]
+    for i in zac:
+        zac1.append(i)
+    for i in zac1:
+        a = i[0:4]
+        if a != "http":
+            filter.append(num)
+            num += 1
+        else:
+            num += 1
+    newzac = [v for i, v in enumerate(zac1) if i not in filter]
+    f = open("all.txt", "w")
+    f.write(str.join(newzac))
+    f.close()
+
+
 def Prefix():
     zac = html.xpath('//a/@href')
     prefix=[]
     for i in zac:
         a = i[0:10]
-        b = i[0]
-        if a!="http://www" and b !="." and b!="#":
+
+        if a!="http://www":
             prefix.append(i)
     str = '\n'
     f = open("pre.txt", "w")
@@ -80,6 +102,8 @@ elif linksearch==2:
 elif linksearch==3:
     all()
     allofall()
+elif linksearch==4:
+    filter()
 os.system("pause")
 
 
